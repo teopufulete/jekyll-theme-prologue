@@ -76,15 +76,15 @@ public static int[] insertElement(int[] arr, int index, int element) {
 
 <br>
 <h2> Linked Lists</h2>
-<p> A linked list is another important linear data structure which might look similar to arrays at first but differs in memory allocation, internal structure and how basic operations of insertion and deletion are carried out.
+<p> A linked list is another important linear data structure which might look similar to arrays at first but differs in memory allocation, internal structure and how basic operations of insertion and deletion are carried out. </p>
 
-A linked list is like a chain of nodes, where each node contains information like data and a pointer to the succeeding node in the chain. There’s a head pointer, which points to the first element of the linked list, and if the list is empty then it simply points to null or nothing.
 
-Linked lists are used to implement file systems, hash tables, and adjacency lists.
+<p><span class="image right"><img src="{{ 'assets/images/linkedlist.png' | relative_url }}" alt="" /></span> A linked list is like a chain of nodes, where each node contains information like data and a pointer to the succeeding node in the chain. There’s a head pointer, which points to the first element of the linked list, and if the list is empty then it simply points to null or nothing.
 
-<p> Here’s a visual representation of the internal structure of a linked list:  <div class="item">
-        <a href="#" class="image fit"><img src="{{ 'assets/images/linkedlist.png' | relative_url }}" alt="Ipsum Feugiat" /></a>
-      </div>  </p>
+Linked lists are used to implement file systems, hash tables, and adjacency lists. 
+
+Here’s a visual representation of the internal structure of a linked list: </p>
+
 
 <div class="6u$ 12u$(small)">
 		<h3> Types of Linked Lists </h3>
@@ -241,7 +241,7 @@ public class LinkedList {
 
 
 <h2>Stacks </h2>
-<p><span class="image left"><img src="{{ 'assets/images/stack.png' | relative_url }}" alt="" /></span> We are all familiar with the Undo option, present in almost every application. Ever wondered how it works? The idea: you store the previous states of your work (which are limited to a specific number) in the memory in such an order that the last one appears first. This can’t be done just by using arrays. That is where Stacks come in. Here’s a visual representation of the stack and it's operations. <div class="6u$ 12u$(small)">
+<p><span class="image right"><img src="{{ 'assets/images/stack.png' | relative_url }}" alt="" /></span> We are all familiar with the Undo option, present in almost every application. Ever wondered how it works? The idea: you store the previous states of your work (which are limited to a specific number) in the memory in such an order that the last one appears first. This can’t be done just by using arrays. That is where Stacks come in. Here’s a visual representation of the stack and it's operations. <div class="6u$ 12u$(small)">
 	<h3> Basic Operations of Stacks </h3>
 			<ul>
 				<li> <b> Push </b> — Inserts an element at the top </li>
@@ -251,9 +251,6 @@ public class LinkedList {
 			</ul>
 		</div>	 </p>
 
-<p> We are all familiar with the Undo option, present in almost every application. Ever wondered how it works? The idea: you store the previous states of your work (which are limited to a specific number) in the memory in such an order that the last one appears first. This can’t be done just by using arrays. That is where Stacks come in. Here’s a visual representation of the internal structure of a linked list:  <div class="item">
-        <a href="#" class="image fit"><img src="{{ 'assets/images/stack.png' | relative_url }}" alt="Ipsum Feugiat" /></a>
-      </div> </p>
       
 <p><span class="image left"><img src="{{ 'assets/images/pancake.png' | relative_url }}" alt="" /></span> A real-life example of Stack could be a number of pancakes stacked on top of each other. In order to get the extra syrupy pancake that’s somewhere in the middle, you will need to remove (or alternatively, eat) all the pancakes placed on top of it. This is how the LIFO (Last In First Out) method works. </p>
 <br>
