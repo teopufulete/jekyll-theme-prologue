@@ -241,7 +241,7 @@ public class LinkedList {
 
 
 <h2>Stacks </h2>
-<p><span class="image right"><img src="{{ 'assets/images/stack.png' | relative_url }}" alt="" /></span> We are all familiar with the Undo option, present in almost every application. Ever wondered how it works? The idea: you store the previous states of your work (which are limited to a specific number) in the memory in such an order that the last one appears first. This can’t be done just by using arrays. That is where Stacks come in. Here’s a visual representation of the stack and it's operations. <div class="6u$ 12u$(small)">
+<p><span class="image right"><img src="{{ 'assets/images/stack.png' | relative_url }}" alt="" /></span> We are all familiar with the Undo option, present in almost every application. Ever wondered how it works? The idea: you store the previous states of your work (which are limited to a specific number) in the memory in such an order that the last one appears first. This can’t be done just by using arrays. That is where Stacks come in. Here’s a visual representation of a stack and it's operations: <div class="6u$ 12u$(small)">
 	<h3> Basic Operations of Stacks </h3>
 			<ul>
 				<li> <b> Push </b> — Inserts an element at the top </li>
