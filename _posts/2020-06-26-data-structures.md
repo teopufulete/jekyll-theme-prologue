@@ -241,12 +241,7 @@ public class LinkedList {
 
 
 <h2>Stacks </h2>
-<p> We are all familiar with the Undo option, present in almost every application. Ever wondered how it works? The idea: you store the previous states of your work (which are limited to a specific number) in the memory in such an order that the last one appears first. This can’t be done just by using arrays. That is where Stacks come in. Here’s a visual representation of the internal structure of a linked list:  <div class="item">
-        <a href="#" class="image fit"><img src="{{ 'assets/images/stack.png' | relative_url }}" alt="Ipsum Feugiat" /></a>
-      </div> </p>
-<p><span class="image left"><img src="{{ 'assets/images/pancake.png' | relative_url }}" alt="" /></span> EA real-life example of Stack could be a number of pancakes stacked on top of each other. In order to get the extra syrupy pancake that’s somewhere in the middle, you will need to remove (or alternatively, eat) all the pancakes placed on top of it. This is how the LIFO (Last In First Out) method works. </p>
-
-<div class="6u$ 12u$(small)">
+<p><span class="image left"><img src="{{ 'assets/images/stack.png' | relative_url }}" alt="" /></span> We are all familiar with the Undo option, present in almost every application. Ever wondered how it works? The idea: you store the previous states of your work (which are limited to a specific number) in the memory in such an order that the last one appears first. This can’t be done just by using arrays. That is where Stacks come in. Here’s a visual representation of the stack and it's operations. <div class="6u$ 12u$(small)">
 	<h3> Basic Operations of Stacks </h3>
 			<ul>
 				<li> <b> Push </b> — Inserts an element at the top </li>
@@ -254,7 +249,15 @@ public class LinkedList {
 				<li> <b> isEmpty </b> — Returns true if the stack is emptyt </li>
 				<li> <b> Top </b> — Returns the top element without removing from the stack </li>
 			</ul>
-		</div>	
+		</div>	 </p>
+
+<p> We are all familiar with the Undo option, present in almost every application. Ever wondered how it works? The idea: you store the previous states of your work (which are limited to a specific number) in the memory in such an order that the last one appears first. This can’t be done just by using arrays. That is where Stacks come in. Here’s a visual representation of the internal structure of a linked list:  <div class="item">
+        <a href="#" class="image fit"><img src="{{ 'assets/images/stack.png' | relative_url }}" alt="Ipsum Feugiat" /></a>
+      </div> </p>
+      
+<p><span class="image left"><img src="{{ 'assets/images/pancake.png' | relative_url }}" alt="" /></span> A real-life example of Stack could be a number of pancakes stacked on top of each other. In order to get the extra syrupy pancake that’s somewhere in the middle, you will need to remove (or alternatively, eat) all the pancakes placed on top of it. This is how the LIFO (Last In First Out) method works. </p>
+<br>
+<br>
 		
 <h3> Stack implementation in Java </h3>	
 {% highlight java linenos %}
