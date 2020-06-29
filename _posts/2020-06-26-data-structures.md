@@ -253,6 +253,7 @@ public class LinkedList {
 				<li> <b> Top </b> — Returns the top element without removing from the stack </li>
 			</ul>
 		</div>	
+		
 <h3> Stack implementation in Java </h3>	
 {% highlight java linenos %}
 public class Stack<Item> implements Iterable<Item> {
@@ -328,6 +329,7 @@ public class Stack<Item> implements Iterable<Item> {
             return item;
         }
     }
+}
 {% endhighlight %}
 <br>
 
