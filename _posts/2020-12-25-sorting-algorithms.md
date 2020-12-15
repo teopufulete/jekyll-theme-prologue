@@ -1,5 +1,5 @@
 ---
-title: Sorting ALgorithms
+title: Sorting Algorithms
 author: Teo
 layout: post
 ---
