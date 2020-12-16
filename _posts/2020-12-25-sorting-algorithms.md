@@ -152,6 +152,60 @@ layout: post
 <hr/>
 
 <h3> Heap Sort </h3>
-{% highlight java linenos %} 
+{% highlight java linenos %} import java.util.*;
+
+class HeapSort {
+
+    public void sort(int heap[]) {
+        int size = heap.length;
+
+        // construct max heap
+        for (int i = size / 2 - 1; i >= 0; i--) {
+            heapify(heap, size, i);
+        }
+
+        // Heap sort
+        for (int i = size - 1; i >= 0; i--) {
+            int temp = heap[0];
+            heap[0] = heap[i];
+            heap[i] = temp;
+            // Heapify root element
+            heapify(heap, i, 0);
+        }
+    }
+
+
+    void heapify(int heap[], int n, int i) {
+        // find largest value
+        int largest = i;
+        int left = 2 * i + 1;
+        int right = 2 * i + 2;
+
+        if (left < n && heap[left] > heap[largest])
+            largest = left;
+        if (right < n && heap[right] > heap[largest])
+            largest = right;
+        
+        // recursively heapify and swap if root is not the largest
+        if (largest != i) {
+            int swap = heap[i];
+            heap[i] = heap[largest];
+            heap[largest] = swap;
+            heapify(heap, n, largest);
+        }
+    }
+
+
+    public static void main(String args[]) {
+        //define input array and print it
+        int heap[] = {6,2,9,4,10,15,1,13};
+        System.out.println("Input Array:" + Arrays.toString(heap));
+        //call HeapSort method for given array
+        HeapSort hs = new HeapSort();
+        hs.sort(heap);
+        //print the sorted array
+        System.out.println("Sorted Array:" + Arrays.toString(heap));
+    }
+}
 {% endhighlight %}
 <hr/>
