@@ -438,7 +438,414 @@ public class Queue<Item> implements Iterable<Item> {
 <hr/>
 <br>
 
+<h2> Binary Search Trees</h2>
+<h3> Tree walks in Java </h3>	
+{% highlight java linenos %}
+
+// java program for different tree traversals
+class Node {
+    int key;
+    Node left, right;
+
+    public Node(int item)    {
+        key = item;
+        left = right = null;
+    }
+}
+
+class BinaryTreeWalk {
+    // root of Binary Tree
+    Node root;
+
+    BinaryTreeWalk() {
+        root = null;
+    }
+
+    // given a binary tree, print its nodes according to the "bottom-up" postorder traversal. */
+    void printPostorder(Node node) {
+        if (node == null)
+            return;
+
+        // first recur on left subtree
+        printPostorder(node.left);
+
+        // then recur on right subtree
+        printPostorder(node.right);
+
+        // now deal with the node
+        System.out.print(node.key + " ");
+    }
+
+    // given a binary tree, print its nodes in inorder
+    void printInorder(Node node) {
+        if (node == null)
+            return;
+
+        // first recur on left child
+        printInorder(node.left);
+
+        // then print the data of node
+        System.out.print(node.key + " ");
+
+        // now recur on right child
+        printInorder(node.right);
+    }
+
+    // given a binary tree, print its nodes in preorder
+    void printPreorder(Node node) {
+        if (node == null)
+            return;
+
+        // first print data of node
+        System.out.print(node.key + " ");
+
+        // then recur on left sutree
+        printPreorder(node.left);
+
+        // now recur on right subtree
+        printPreorder(node.right);
+    }
+
+    // Wrappers over above recursive functions
+    void printPostorder() {
+        printPostorder(root);
+    }
+
+    void printInorder() {
+        printInorder(root);
+    }
+
+    void printPreorder() {
+        printPreorder(root);
+    }
+
+    public static void main(String[] args) {
+        BinaryTreeWalk tree = new BinaryTreeWalk();
+        tree.root = new Node(1);
+        tree.root.left = new Node(2);
+        tree.root.right = new Node(3);
+        tree.root.left.left = new Node(4);
+        tree.root.left.right = new Node(5);
+
+        System.out.println("Preorder traversal of binary tree is ");
+        tree.printPreorder();
+
+        System.out.println("\nInorder traversal of binary tree is ");
+        tree.printInorder();
+
+        System.out.println("\nPostorder traversal of binary tree is ");
+        tree.printPostorder();
+    }
+}
+{% endhighlight %}
+<hr/>
+<br>
+
+
+<h2> Hash Tables</h2>
+<h3> Collisions resolved by chaining in Java </h3>	
+{% highlight java linenos %}
+// Java program to demonstrate implementation of our own hash table with chaining for collision detection
+import java.util.ArrayList;
+
+// A node of chains
+class HashNode<K, V> {
+    K key;
+    V value;
+
+    // Reference to next node
+    HashNode<K, V> next;
+
+    // Constructor
+    public HashNode(K key, V value) {
+        this.key = key;
+        this.value = value;
+    }
+}
+
+// Class to represent entire hash table
+class ChainingHash<K, V> {
+    // bucketArray is used to store array of chains
+    private ArrayList<HashNode<K, V>> bucketArray;
+
+    // Current capacity of array list
+    private int numBuckets;
+
+    // Current size of array list
+    private int size;
+
+    // Constructor (Initializes capacity, size and empty chains.
+    public ChainingHash() {
+        bucketArray = new ArrayList<>();
+        numBuckets = 10;
+        size = 0;
+
+        // Create empty chains
+        for (int i = 0; i < numBuckets; i++)
+            bucketArray.add(null);
+    }
+
+    public int size() {
+        return size;
+    }
+
+    public boolean isEmpty() {
+        return size() == 0;
+    }
+
+    // This implements hash function to find index for a key
+    private int getBucketIndex(K key) {
+        int hashCode = key.hashCode();
+        int index = hashCode % numBuckets;
+        return index;
+    }
+
+    // Method to remove a given key
+    public V remove(K key) {
+        // Apply hash function to find index for given key
+        int bucketIndex = getBucketIndex(key);
+
+        // Get head of chain
+        HashNode<K, V> head = bucketArray.get(bucketIndex);
+
+        // Search for key in its chain
+        HashNode<K, V> prev = null;
+        while (head != null) {
+            // If Key found
+            if (head.key.equals(key))
+                break;
+
+            // Else keep moving in chain
+            prev = head;
+            head = head.next;
+        }
+
+        // If key was not there
+        if (head == null)
+            return null;
+
+        // Reduce size
+        size--;
+
+        // Remove key
+        if (prev != null)
+            prev.next = head.next;
+        else
+            bucketArray.set(bucketIndex, head.next);
+
+        return head.value;
+    }
+
+    // Returns value for a key
+    public V get(K key) {
+        // Find head of chain for given key
+        int bucketIndex = getBucketIndex(key);
+        HashNode<K, V> head = bucketArray.get(bucketIndex);
+
+        // Search key in chain
+        while (head != null) {
+            if (head.key.equals(key))
+                return head.value;
+            head = head.next;
+        }
+
+        // If key not found
+        return null;
+    }
+
+    // Adds a key value pair to hash
+    public void add(K key, V value) {
+        // Find head of chain for given key
+        int bucketIndex = getBucketIndex(key);
+        HashNode<K, V> head = bucketArray.get(bucketIndex);
+
+        // Check if key is already present
+        while (head != null) {
+            if (head.key.equals(key))
+            {
+                head.value = value;
+                return;
+            }
+            head = head.next;
+        }
+
+        // Insert key in chain
+        size++;
+        head = bucketArray.get(bucketIndex);
+        HashNode<K, V> newNode = new HashNode<K, V>(key, value);
+        newNode.next = head;
+        bucketArray.set(bucketIndex, newNode);
+
+        // If load factor goes beyond threshold, then double hash table size
+        if ((1.0*size)/numBuckets >= 0.7) {
+            ArrayList<HashNode<K, V>> temp = bucketArray;
+            bucketArray = new ArrayList<>();
+            numBuckets = 2 * numBuckets;
+            size = 0;
+            for (int i = 0; i < numBuckets; i++)
+                bucketArray.add(null);
+
+            for (HashNode<K, V> headNode : temp) {
+                while (headNode != null) {
+                    add(headNode.key, headNode.value);
+                    headNode = headNode.next;
+                }
+            }
+        }
+    }
+
+    // Driver method to test Map class
+    public static void main(String[] args) {
+        ChainingHash<String, Integer>map = new ChainingHash<>();
+        map.add("this",1 );
+        map.add("coder",2 );
+        map.add("this",4 );
+        map.add("hi",5 );
+        System.out.println(map.size());
+        System.out.println(map.remove("this"));
+        System.out.println(map.remove("this"));
+        System.out.println(map.size());
+        System.out.println(map.isEmpty());
+    }
+}
+{% endhighlight %}
+<hr/>
+<br>
+
+<h3> Open-addressing implementation in Java </h3>	
+{% highlight java linenos %} public class OpenAddressingHash {
+    // properties of hash table
+    private int max = 20;
+    private HashTableNode[] vector = new HashTableNode[max];
+
+    // element of hash table.
+    class HashTableNode {
+        public int key;
+
+        HashTableNode(int key) {
+            this.key = key;
+        }
+    }
+
+    // constructor
+    OpenAddressingHash() {
+        for (int i = 0; i < max; i++) {
+            this.vector[i] = null;
+        }
+    }
+
+    // add element to hash table
+    public void insert(int key, int i) {
+        int hashcode = this.hashFunction(key, i);
+
+        if ((i > 0) && (hashcode == this.hashFunction(key, 0))) {
+            System.out.println("It's not possible to add the key " + key + " in hash table.");
+            return;
+        }
+
+        if (this.vector[hashcode] != null) {
+            this.insert(key, i + 1);
+        }
+
+        else {
+            this.vector[hashcode] = new HashTableNode(key);
+        }
+    }
+
+    // overloading of add() method. Simplifies the call of method.
+    public void insert(int key) {
+        this.insert(key, 0);
+    }
+
+    // search an element in hash table.
+    public int search(int key, int i) {
+        int hashcode = this.hashFunction(key, i);
+
+        if ((i > 0) && (hashcode == this.hashFunction(key, 0))) {
+            System.out.println("Key " + key + " not found in hash table. It was made " + i + " stepsizes.");
+            return -99;
+        }
+
+        if ((this.vector[hashcode] != null) && (this.vector[hashcode].key == key)) {
+            System.out.println("Key " + key + " found in hash table in " + (i + 1) + "-esim stepsize.");
+            return hashcode;
+        }
+
+        return this.search(key, i + 1);
+    }
+
+    // overloading of search() method. Simplifies the call of method.
+    public int search(int key) {
+        return this.search(key, 0);
+    }
+
+    //Remove an element from the hash table.
+    public void delete(int key) {
+
+        int i = this.search(key);
+
+        if (i != -99) {
+            System.out.println("The key " + key + " was removed from hash table.");
+            this.vector[i] = null;
+        }
+        else {
+            System.out.println("The key " + key + " was not removed, because it does not exists in hash table.");
+        }
+    }
+
+    // linear probing
+    public int linearProbing(int key, int i) {
+        return (key + i) % this.max;
+    }
+
+    // quadratic probing.
+    public int quadraticProbing(int key, int i) {
+        return (key + (i * i)) % this.max;
+    }
+
+    // double hashing.
+    public int doubleHash(int key, int i) {
+        return (this.doubleHash2(key) + i) % this.max;
+    }
+
+    // auxiliar hash function to Double hashing made by double() method.
+    public int doubleHash2(int key) {
+        return (1 + key) % (this.max - 1);
+    }
+
+    // hash function.
+    public int hashFunction(int key, int i) {
+        return this.linearProbing(key, i);
+    }
+
+    // toString method.
+    public String toString() {
+        String description = "Hash table: [ ";
+        for (int i = 0; i < this.max; i++) {
+            if (this.vector[i] == null) {
+                description += "__  ";
+            }
+            else {
+                description += String.format("%2d  ", this.vector[i].key);
+            }
+        }
+        description += "]";
+        return description;
+    }
+}
+{% endhighlight %}
+<hr/>
+<br>
+
+
 <h2> </h2>
+<h3>  </h3>	
+{% highlight java linenos %}
+{% endhighlight %}
+<hr/>
+<br>
+
+
 <p> </p>
 <p> </p>
 <p> </p>
